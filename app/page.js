@@ -1,13 +1,13 @@
-"use client"
-import React from 'react'
-import Home from './components/Home'
+import React from "react";
+import ImageGallery from "./components/ImageGallery";
 
 function page() {
+
   return (
-    <>
-      <Home />
-    </>
-  )
+    <div className="pt-10 text-white">
+      <ImageGallery />
+    </div>
+  );
 }
 
-export default page
+export default page;
