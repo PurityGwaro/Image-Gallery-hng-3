@@ -14,7 +14,7 @@ export default function ImageGallery() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        let url = `https://api.pexels.com/v1/curated?per_page=12`;
+        let url = `https://api.pexels.com/v1/curated?per_page=20`;
 
         if (searchString) {
           url = `https://api.pexels.com/v1/search?query=${searchString}&per_page=12`;
@@ -25,12 +25,13 @@ export default function ImageGallery() {
             Authorization: "QqYnJggmS8c9EK3NN81Y2gQS07Fsk2QdKQGYwfckD2cHRLkl4i6CTqyI",
           },
         });
-
+        
+        const responseWithAlt = response.data.photos.filter((image) => image.alt);
         setErrorMessage(false);
         if (searchString) {
-          setSearchResults(response.data.photos);
+          setSearchResults(responseWithAlt);
         } else {
-          setImages(response.data.photos);
+          setImages(responseWithAlt);
         }
         setLoading(false);
       } catch (error) {
