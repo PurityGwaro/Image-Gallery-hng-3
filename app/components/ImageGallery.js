@@ -4,6 +4,7 @@ import ImageItem from "./ImageItem";
 import axios from "axios";
 import Loader from "./Loader";
 import SearchImage from "./SearchImage";
+import DraggableImageContainer from "./DraggableImageContainer";
 
 export default function ImageGallery() {
   const [images, setImages] = useState([]);
@@ -65,7 +66,18 @@ export default function ImageGallery() {
       searchImages(searchString);
     }
   }, [searchString]);
-  console.log("search query in gallery: ", searchString);
+  // console.log("search query in gallery: ", searchString);
+  const onDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+
+    const newImages = [...images];
+    const [reorderedImage] = newImages.splice(result.source.index, 1);
+    newImages.splice(result.destination.index, 0, reorderedImage);
+    setImages(newImages);
+  };
+
   return (
     <div className="container mx-auto">
       <SearchImage setSearchString={setSearchString} />
@@ -80,8 +92,8 @@ export default function ImageGallery() {
       {loading ? (
         <Loader />
       ) : (
-        <div className="container mx-auto">
-          <div className="grid items-center justify-center w-full gap-20 px-6 md:px-0 lg:grid-cols-4 md:grid-cols-2 place-content-center">
+        <div className="container pt-10 pb-20 mx-auto">
+          {/* <div className="grid items-center justify-center w-full gap-20 px-6 md:px-0 lg:grid-cols-4 md:grid-cols-2 place-content-center">
             {searchResults.length > 0 ? (
               searchResults.map((image, index) => (
                 <ImageItem key={image.id} image={image} />
@@ -93,7 +105,8 @@ export default function ImageGallery() {
             ) : (
               <p>No results found.</p>
             )}
-          </div>
+          </div> */}
+          <DraggableImageContainer images={searchString ? searchResults : images} onDragEnd={onDragEnd}/>
         </div>
       )}
     </div>

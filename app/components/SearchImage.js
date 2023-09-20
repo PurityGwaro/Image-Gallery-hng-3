@@ -9,7 +9,7 @@ function SearchImage({ setSearchString }) {
     setQuery('')
   }
   return (
-    <form className="grid w-full gap-10 px-4 mx-auto mb-10 text-black md:grid-cols-2 md:px-0" onSubmit={handleSubmit}>
+    <form className="grid w-full gap-10 px-4 mx-auto mt-10 mb-10 text-black md:grid-cols-2 md:px-0" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Enter any name to search for images"

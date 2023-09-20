@@ -6,8 +6,8 @@ function ImageItem({ image }) {
   return (
     <Image
       src={image.src.large2x}
-      height={150}
-      width={150}
+      height={250}
+      width={250}
       alt={image.alt}
       className="h-auto border-2 shadow-xl md:w-[300px] rounded-2xl"
     />
