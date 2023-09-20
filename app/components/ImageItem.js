@@ -12,7 +12,7 @@ function ImageItem({ image }) {
       alt={image.alt}
       className="h-auto border-2 shadow-xl md:w-[300px] rounded-2xl"
     />
-    {/* <span>#{image.photographer}</span> */}
+    <span>{image.alt}</span>
     </div>
   );
 }

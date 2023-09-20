@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-import ImageItem from "./ImageItem";
 import axios from "axios";
 import Loader from "./Loader";
 import SearchImage from "./SearchImage";
 import DraggableImageContainer from "./DraggableImageContainer";
+import Link from "next/link";
 
 export default function ImageGallery() {
   const [images, setImages] = useState([]);
@@ -66,21 +66,20 @@ export default function ImageGallery() {
       searchImages(searchString);
     }
   }, [searchString]);
-  // console.log("search query in gallery: ", searchString);
-  const onDragEnd = (result) => {
-    if (!result.destination) {
-      return;
-    }
 
-    const newImages = [...images];
-    const [reorderedImage] = newImages.splice(result.source.index, 1);
-    newImages.splice(result.destination.index, 0, reorderedImage);
-    setImages(newImages);
+  
+  const onImageMove = (sourceIndex, targetIndex) => {
+    const updatedImages = [...images];
+    const [movedImage] = updatedImages.splice(sourceIndex, 1);
+    updatedImages.splice(targetIndex, 0, movedImage);
+    setImages(updatedImages);
   };
+
 
   return (
     <div className="container mx-auto">
       <SearchImage setSearchString={setSearchString} />
+      {/* <Link href='/' className="px-4 py-2 font-bold bg-orange-600 rounded-xl">BACK</Link> */}
       {erroMessage && (
         <div className="grid items-center justify-center place-content-center">
           <p className="items-center px-4 mt-20 text-xl text-red-600 text-semibold place-content-center">
@@ -92,7 +91,10 @@ export default function ImageGallery() {
       {loading ? (
         <Loader />
       ) : (
-          <DraggableImageContainer images={searchString ? searchResults : images} onDragEnd={onDragEnd}/>
+          <DraggableImageContainer 
+          images={searchString ? searchResults : images} 
+          onImageMove={onImageMove}
+          />
       )}
     </div>
   );
