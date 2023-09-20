@@ -19,3 +19,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
  Enter password: `1Password`
 
  You can then search for anything you'd like and will be able to move images around as you please.
+
+ Link to the hosted site:
+ [https://image-gallery-hng-3.vercel.app/](image gallery)
