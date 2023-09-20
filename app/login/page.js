@@ -2,12 +2,14 @@
 import { useState } from 'react';
 import { auth } from '@/firebase';
 import { useRouter } from 'next/navigation';
+import ImageGallery from '../components/ImageGallery';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [loggingIn, setLoggingIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false); // Track login state
   const router = useRouter();
 
   const handleLogin = async (e) => {
@@ -17,6 +19,7 @@ const Login = () => {
       setError(false);
       setLoggingIn(true);
       await auth.signInWithEmailAndPassword(email, password);
+      setLoggedIn(true); // Set login state to true upon successful login
       router.push('/');
     } catch (error) {
       setError(true);
@@ -26,6 +29,12 @@ const Login = () => {
     }
   };
 
+  // Conditionally render the ImageGallery component if logged in
+  if (loggedIn) {
+    return <ImageGallery />;
+  }
+
+  // Render the login form if not logged in
   return (
     <div className='container grid h-screen grid-cols-1 mx-auto place-content-center'>
       <div className='grid w-1/2 p-4 bg-white border place-self-center'>
