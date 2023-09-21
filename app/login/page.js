@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { auth } from '@/firebase';
 import { useRouter } from 'next/navigation';
 import ImageGallery from '../components/ImageGallery';
@@ -29,7 +29,20 @@ const Login = () => {
     }
   };
 
-  // Conditionally render the ImageGallery component if logged in
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setLoggedIn(true);
+        router.push('/');
+      }
+    });
+
+    return () => {
+      unsubscribe(); // Unsubscribe from the auth state listener when the component unmounts
+    };
+  }, []);
+
+
   if (loggedIn) {
     return <ImageGallery />;
   }
