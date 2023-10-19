@@ -9,7 +9,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [loggingIn, setLoggingIn] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false); // Track login state
+  // const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const router = useRouter();
 
   const handleLogin = async (e) => {

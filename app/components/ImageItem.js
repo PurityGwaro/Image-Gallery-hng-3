@@ -10,7 +10,7 @@ function ImageItem({ image }) {
       height={250}
       width={250}
       alt={image.alt}
-      style={{ aspectRatio: "1/1" }}
+      // style={{ aspectRatio: "1/1" }}
       className="h-auto border-2 shadow-xl md:w-[300px] rounded-2xl place-self-center"
     />
     <span className="mt-2 text-sm text-orange-500 place-self-center">{image.alt}</span>
